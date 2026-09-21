@@ -1,2 +1,2 @@
-# AT
-Algo trading
+# Pairs Trading Strategy Backtester
+Personal project
