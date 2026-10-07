@@ -14,6 +14,7 @@ This repositary contains tools to fit linear regression models to compute the he
 ├── notebooks/
 │   ├── cointegrated_equity_pairs.ipynb  # Pair selection & statistical testing (in progress)
 │   └── 03_pairs_regression_idead.ipynb  # Initial regression & signal analysis
+│   └── evaluations.ipynb                # Evalutions of each iteration of the different models (in progress)
 ├── src/                                 # Modular backtesting code (in progress)
 ├── requirements.txt                     # Dependencies
 └── README.md
