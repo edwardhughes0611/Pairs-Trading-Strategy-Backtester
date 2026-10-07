@@ -16,6 +16,7 @@ This repositary contains tools to fit linear regression models to compute the he
 │   └── 03_pairs_regression_idead.ipynb  # Initial regression & signal analysis
 │   └── evaluations.ipynb                # Evalutions of each iteration of the different models (in progress)
 ├── src/                                 # Modular backtesting code (in progress)
+├── results/                             # Saved picture files of graphs made using matplotlib 
 ├── requirements.txt                     # Dependencies
 └── README.md
 ```
