@@ -33,4 +33,4 @@ This repositary contains tools to fit linear regression models to compute the he
 
 ## Setup & Requirements
 ```bash
-pip install pandas numpy statsmodels yfinance matplotlib
+pip install pandas numpy statsmodels yfinance matplotlib 
