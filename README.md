@@ -1,8 +1,8 @@
 # Pairs-Trading-Strategy-Backtester
-A personal project fpor statistical arbitrage using cointegration and mean-reversion signals on equity pairs.
+A personal project for statistical arbitrage using cointegration and mean-reversion signals on equity pairs.
 
 ## Overview
-This repositary contains tools to fit linear regression models to compute the head ratios of cointegrated equity pairs, and backtest a mean-reverting strategy based on $z$-scors.
+This repo contains tools to fit linear regression models to compute the head ratios of cointegrated equity pairs, and backtest a mean-reverting strategy based on $z$-scors.
 
 ## Strategy & Methodology
 1. **Selection:** Search candidate equity pairs for stationarity in their price spread using the Engle-Granger two-step test.
