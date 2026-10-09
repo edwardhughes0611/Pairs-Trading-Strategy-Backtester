@@ -83,12 +83,49 @@ def backtest_pairs_trading_strategy(tickers: list, train_start: str, train_end: 
 
     print(f"Total out of sample returns from {test_start} to {test_end}: {final_pct_return:.2f}%")
 
+    # --- Sharpe Ratio Calculation ---
     test_df['Cumulative_Pct_Return'] = (test_df['Cumulative_return'] - 1) * 100
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10), sharex=True)
+    mean_daily_return = test_df['Strategy_return'].mean()
+    std_daily_return = test_df['Strategy_return'].std()
 
-    q = input("Show plots? (y/n): ").strip().lower()
-    if q == 'y':
+    annualized_return = mean_daily_return * 252
+    annualized_volatility = std_daily_return * np.sqrt(252)
+
+    rf_data = yf.download('^IRX', start=test_start, end=test_end)['Close']
+
+    risk_free_rate = float((rf_data / 100).mean())
+
+    if annualized_volatility != 0:
+        sharpe_ratio = (annualized_return - risk_free_rate) / annualized_volatility
+    else:
+        sharpe_ratio = 0
+
+    long_trades = ((test_df['Position'] == 1) & (test_df['Position'].shift(1) != 1)).sum()
+    short_trades = ((test_df['Position'] == -1) & (test_df['Position'].shift(1) != -1)).sum()
+    exits = ((test_df['Position'] == 0) & (test_df['Position'].shift(1) != 0)).sum()
+    n_trades = long_trades + short_trades
+
+    return{
+        "Total return": final_pct_return,
+        "Annualised return": annualized_return * 100,
+        "Annualised volatility": annualized_volatility * 100,
+        "Average risk-free rate": risk_free_rate * 100,
+        "Sharpe Ratio": sharpe_ratio,
+        "n_trades": n_trades
+    }
+
+
+'''
+    print(f"Annualized Return: {annualized_return * 100:.4f}%")
+    print(f"Annualized Volatility: {annualized_volatility * 100:.4f}%")
+    print(f"Average Risk-Free Rate Used: {risk_free_rate * 100:.4f}%")
+    print(f"Sharpe Ratio: {sharpe_ratio:.4f}")
+
+    q2 = input("Show plots? (y/n): ").strip().lower()
+    if q2 == 'y':
+
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10), sharex=True)
 
         # --- Subplot 1: Cumulative Returns ---
         ax1.plot(test_df.index, test_df['Cumulative_Pct_Return'], label='Strategy Return (%)', color='blue', linewidth=2)
@@ -118,7 +155,7 @@ def backtest_pairs_trading_strategy(tickers: list, train_start: str, train_end: 
 
         plt.tight_layout()
         plt.show()
-
+'''
 
 if __name__ == "__main__":
     tickers = ["KO", "PEP"]
