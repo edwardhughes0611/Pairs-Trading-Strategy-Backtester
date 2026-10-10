@@ -6,7 +6,7 @@ import statsmodels.api as sm
 from typing import Optional
 from data_loader import fetch_multiple_stocks_close
 
-def estimate_half_life(spread: pd>series) -> float:
+def estimate_half_life(spread: pd.Series) -> float:
     """
     Half-life (in trading days) of mean reversion of a spread.
  
@@ -39,6 +39,7 @@ def backtest_pairs_trading_strategy(tickers: list,
                                     train_start: str,
                                     train_end: str,
                                     test_start: str, test_end: str,
+                                    z_threshold: float = 2,
                                     half_life: Optional[float] = None,
                                     window: Optional[int] = None,
                                     window_multiple: float = 2.0
@@ -174,15 +175,14 @@ def backtest_pairs_trading_strategy(tickers: list,
 
 
 if __name__ == "__main__":
-    tickers = ["KO", "PEP"]
+    tickers = ["V", "MA"]
     train_start = "2015-01-01"
     train_end = "2021-12-31"
     test_start = "2022-01-01"
     test_end = "2026-01-01"
-    z_threshold = 1.5
-    window = 60
+    z_threshold = 2
 
-    results = backtest_pairs_trading_strategy(tickers, train_start, train_end, test_start, test_end, window, z_threshold)
+    results = backtest_pairs_trading_strategy(tickers, train_start, train_end, test_start, test_end, z_threshold)
 
     print("\n========== BACKTEST RESULTS ==========")
     print(f"Half-life:              {results['Half-life']:.1f} days")
