@@ -18,7 +18,8 @@ This repo contains tools to screen equity pairs for cointegration, fit a linear 
    * Positions are taken at the close of the signal day and PnL is realised at the close of the following day.
 5. **Returns & Risk:** Daily PnL is divided by total capital ($Y + |\beta| X$) to give strategy returns. Annualised return and volatility use 252 trading days, and the average risk-free rate comes from the 13-week T-bill yield (`^IRX`). The Sharpe ratio is calculated under two conventions:
    Convention A subtracts the risk-free rate, while convention B does not, since the strategy returns are trading profit only and the interest is earned on top. Both are reported so the choice is explicit.
-   $$\text{Sharpe}_A = \frac{\bar r_{\text{ann}} - r_f}{\sigma_{\text{ann}}} \qquad\qquad \text{Sharpe}_B = \frac{\bar r_{\text{ann}}}{\sigma_{\text{ann}}}$$
+   $$
+   \text{Sharpe}_A = \frac{\bar r_{\text{ann}} - r_f}{\sigma_{\text{ann}}} \qquad\qquad \text{Sharpe}_B = \frac{\bar r_{\text{ann}}}{\sigma_{\text{ann}}}$$
 ## Usage
 ```python
 from backtester import backtest_pairs_trading_strategy
